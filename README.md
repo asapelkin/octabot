@@ -1,2 +1,4 @@
 # octabot
-devel status yet
+Telegram Bot -- GNU Octave (MATLAB) interpreter 
+
+
