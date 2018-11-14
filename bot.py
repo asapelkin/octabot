@@ -10,7 +10,7 @@ oct_sess_dict = dict()   # здесь будут хранится открыты
 def get_oct_session(id):   # получение существующей сессии или создание новой
     octave_session = oct_sess_dict.get(id)
     if not octave_session:
-        print("create new octave shell for chat № " + str(id))
+        print("create new octave shell for chat # " + str(id))
         octave_session = Oct2Py()
         octave_session.eval("set(0, 'defaultfigurevisible', 'off');")
         oct_sess_dict[id] = octave_session
