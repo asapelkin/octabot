@@ -8,10 +8,8 @@ WORKDIR /var
 RUN git  clone  https://github.com/asapelkin/octabot.git 
 WORKDIR /var/octabot
 RUN pip3 install -r requirements.txt
+RUN mkdir /tmp/octabot/
 
 ADD config.py /var/octabot/config.py
-
-RUN ls
-RUN cat start.sh
 
 CMD ["sh","/var/octabot/start.sh"]
