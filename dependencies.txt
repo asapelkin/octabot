@@ -1,7 +1,6 @@
-python 3
-pip install pytelegrambotapi
-pip install oct2py
-pip install scipy
+pytelegrambotapi
+oct2py
+scipy
 
-additional:
-epstool (package epstool in Debian)
+#additional:
+#epstool (package epstool in Debian)
