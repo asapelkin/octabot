@@ -31,7 +31,7 @@ def text_handler(message): # обработчик текстовых сообщ�
         bot.send_message(message.chat.id, "system is forbidden")
         return
     
-    else if "plot" in command or "mesh" in command:
+    if "plot" in command or "mesh" in command:
         user_path = "/tmp/octabot/"+ str(chat_id)
         if not os.path.exists(user_path):
             os.mkdir(user_path)
