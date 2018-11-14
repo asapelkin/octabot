@@ -27,20 +27,25 @@ def text_handler(message): # обработчик текстовых сообщ�
     plot_flag = False
     octave_session = get_oct_session(chat_id)
 
-    if "plot" in command or "mesh" in command:
+    if "system" in command.lower():        
+        bot.send_message(message.chat.id, "system is forbidden")
+        return
+    
+    else if "plot" in command or "mesh" in command:
         user_path = "/tmp/octabot/"+ str(chat_id)
         if not os.path.exists(user_path):
             os.mkdir(user_path)
         command = "figure(1, 'visible', 'off'); \n" + command + "\n  print -djpg  '"+ user_path +"/output_img.jpg'; close(gcf)"
         plot_flag = True
+        
     try:
         output = octave_session.eval(command, return_both=True, timeout=10)[0]
     except BaseException:
         output = "Syntax error"
-
-    print("output = " + output) # only for debug
+    
     if output:
         bot.send_message(message.chat.id, output)
+        
     if plot_flag:
         photo = open('/tmp/octabot/'+ str(chat_id) +'/output_img.jpg', 'rb')
         bot.send_photo(chat_id, photo)
