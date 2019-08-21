@@ -33,12 +33,11 @@ def handle_start_help(message):
 
 def _octave_eval(octave_session, command):
     try:
-        output_lines = []
-        octave_session.eval(command, stream_handler=output_lines.append, timeout=OCTAVE_TIMEOUT)
-        output = "\n".join(output_lines[1:])
+        output = octave_session.eval(command, return_both=True, timeout=10)[0]
     except Oct2PyError as err:
         logging.error(err)
         output = f"Syntax error: {err}"
+    logging.info(f"Answer for the user: {output}")
     return output
 
 
@@ -51,6 +50,7 @@ def text_handler(message):
 
     for forbidden_word in FORBIDDEN_COMMANDS:
         if forbidden_word in command.lower():
+            logging.info(f"Prohibited word detected {forbidden_word}")
             TELEBOT.send_message(message.chat.id, f"The use of '{forbidden_word}' is prohibited.")
             return
 
